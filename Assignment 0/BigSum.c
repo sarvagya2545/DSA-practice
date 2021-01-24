@@ -17,6 +17,7 @@ int main() {
         len2++;
     }
 
+    // set the resLength, to max(len1,len2) + 1
     resLength = len1 > len2 ? len1 + 1 : len2 + 1;
     // set one place more due to a possible carry
     char res[resLength];
@@ -29,14 +30,14 @@ int main() {
     /*
         We start from the end of the strings adding number by number
     */
-    for(int i = len1 - 1, j = len2 - 1; (i >= 0) || (j >= 0) ; i--, j--) {
+    for(int i = len1 - 1, j = len2 - 1; (i >= 0) || (j >= 0) || carry ; i--, j--) {
         // n is the sum of the current digits at index + the carry over
         // s1[i] - '0' actually converts from char to int
         int n1 = i >= 0 ? (s1[i] - '0') : 0;
         int n2 = j >= 0 ? (s2[j] - '0') : 0;
         n = n1 + n2 + carry;
 
-        resIndex = len1 > len2 ? resLength - (len1 - i) : resLength - (len2 - i);
+        resIndex = len1 > len2 ? resLength - (len1 - i) : resLength - (len2 - j);
         // the digit at 1's place is copied but the rest is sent over to carry
         int r = n % 10;
         // '0' + r converts integer r to char
