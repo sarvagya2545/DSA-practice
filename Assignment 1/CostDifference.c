@@ -51,6 +51,6 @@ int main() {
       maxCost = arrayCost;
   }
 
-  printf("%lld\n", maxCost - minCost);
+  printf("%lld", maxCost - minCost);
   return 0;
 }
