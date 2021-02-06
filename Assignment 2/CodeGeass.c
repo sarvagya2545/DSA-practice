@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 // ALL HAIL LELOUCH!!!
 
@@ -31,5 +32,5 @@ int main() {
   }
 
   for(long long i = 0; i < n; i++)
-    printf("%lld ", knightmares[i]);
+    printf("%lld ", knightmares[i] % ((int) pow(10,9) + 7));
 }
