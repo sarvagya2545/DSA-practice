@@ -68,8 +68,8 @@ int maxVisitedIslands(int** graph, int v) {
 
 int main() {
   int e,v;
-  scanf("%d", &e);
   scanf("%d", &v);
+  scanf("%d", &e);
 
   int **graph;
 
