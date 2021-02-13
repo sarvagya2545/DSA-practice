@@ -1,3 +1,7 @@
+//N<10^5 and so direct recursion can be used
+
+
+
 #include<stdio.h>
 
 int div1(int n)
