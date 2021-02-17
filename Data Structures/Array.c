@@ -7,6 +7,7 @@ struct Array {
   int length;
 };
 
+// double the size of the array, not to be used by user.
 void doubleSize(struct Array *arr) {
   int newSize = arr->capacity * 2;
   int *p;
@@ -26,6 +27,7 @@ void Display(struct Array arr) {
     printf("%d ", arr.A[i]);
 }
 
+// append the item at the end of the array
 void Append(struct Array *arr, int x) {
   // if length == capacity, double the capacity of the array
   if(arr->length == arr->capacity)
@@ -37,6 +39,7 @@ void Append(struct Array *arr, int x) {
   arr -> length = arr -> length + 1;
 }
 
+// insert the item at the provided index
 void Insert(struct Array *arr, int x, int index) {
 
   if(index > arr->length) {
@@ -77,6 +80,17 @@ void DeleteAtIndex(struct Array *arr, int index) {
   arr->length--;
 }
 
+// Find the item and return the index, if not found, return -1;
+int Search(struct Array *arr, int x) {
+  for(int i = 0; i < arr->length; i++) {
+    if((arr->A)[i] == x) {
+      return i;
+    }
+  }
+
+  return -1;
+}
+
 int main() {
   struct Array arr;
   scanf("%d", &arr.capacity);
@@ -102,5 +116,7 @@ int main() {
 
   printf("\n----\n");
   Display(arr);
+
+  printf("\n%d", Search(&arr, 5));
 
 }
