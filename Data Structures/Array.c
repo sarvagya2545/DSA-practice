@@ -91,6 +91,21 @@ int Search(struct Array *arr, int x) {
   return -1;
 }
 
+// get the item at the current index
+int Get(struct Array *arr, int index) {
+  return (arr->A)[index];
+}
+
+void Set(struct Array *arr, int x, int index) {
+  // if the index >= length - 1, stop executing
+  if(index >= arr->length - 1 || index < 0) {
+    printf("invalid index");
+    return;
+  }
+
+  (arr->A)[index] = x;
+}
+
 int main() {
   struct Array arr;
   scanf("%d", &arr.capacity);
@@ -117,6 +132,12 @@ int main() {
   printf("\n----\n");
   Display(arr);
 
-  printf("\n%d", Search(&arr, 5));
+  printf("\nSearching item %d, it is at index %d", 5, Search(&arr, 5));
+  printf("\nGet item at index %d, it is %d", 3, Get(&arr, 3));
+
+  Set(&arr, 10, 2);
+
+  printf("\n----\n");
+  Display(arr);
 
 }
