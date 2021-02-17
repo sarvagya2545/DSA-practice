@@ -61,6 +61,22 @@ void Insert(struct Array *arr, int x, int index) {
   (arr->A)[index] = x;
 }
 
+void DeleteAtIndex(struct Array *arr, int index) {
+  // if the index >= length - 1, stop executing
+  if(index >= arr->length - 1 || index < 0) {
+    printf("invalid index");
+    return;
+  }
+
+  // left shift the items from the index to the end
+  for(int i = index; i < arr->length - 1; i++) {
+    (arr->A)[i] = (arr->A)[i + 1];
+  }
+
+  // decrease the length of the array by 1
+  arr->length--;
+}
+
 int main() {
   struct Array arr;
   scanf("%d", &arr.capacity);
@@ -78,7 +94,11 @@ int main() {
   Insert(&arr, 4, 1);
   Insert(&arr, 5, 1);
   Insert(&arr, 7, 0);
-  Insert(&arr, 11, 10);
+
+  printf("\n----\n");
+  Display(arr);
+
+  DeleteAtIndex(&arr, 4);
 
   printf("\n----\n");
   Display(arr);
