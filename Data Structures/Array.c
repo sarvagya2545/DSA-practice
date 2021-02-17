@@ -30,11 +30,28 @@ void Append(struct Array *arr, int x) {
   // if length == capacity, double the capacity of the array
   if(arr->length == arr->capacity)
     doubleSize(arr);
-
-  // return;
+  
   // add the element at the end of the array
   (arr -> A)[arr -> length] = x;
+  // increase the length of the element by 1
   arr -> length = arr -> length + 1;
+}
+
+void Insert(struct Array *arr, int x, int index) {
+  // if length == capacity, double the capacity of the array
+  if(arr->length == arr->capacity)
+    doubleSize(arr);
+
+  // copy the elements from the end to shift 1 space right till the index
+  for(int i = arr->length; i > index; i--) {
+    (arr->A)[i] = (arr->A)[i - 1];
+  }
+
+  // increase the length of the array by 1
+  arr->length = arr->length + 1;
+
+  // now, at the index, insert the specified number
+  (arr->A)[index] = x;
 }
 
 int main() {
@@ -51,7 +68,9 @@ int main() {
   printf("----\n");
   Display(arr);
 
-  Append(&arr, 3);
+  Insert(&arr, 4, 1);
+  Insert(&arr, 5, 1);
+  Insert(&arr, 7, 0);
 
   printf("\n----\n");
   Display(arr);
