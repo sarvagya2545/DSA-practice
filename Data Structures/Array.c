@@ -38,6 +38,13 @@ void Append(struct Array *arr, int x) {
 }
 
 void Insert(struct Array *arr, int x, int index) {
+
+  if(index > arr->length) {
+    printf("\nERROR: You tried to insert %d at the index %d, which exceeds the current size of array, so insert operation aborted.\n", x ,index);
+
+    return;
+  }
+
   // if length == capacity, double the capacity of the array
   if(arr->length == arr->capacity)
     doubleSize(arr);
@@ -71,6 +78,7 @@ int main() {
   Insert(&arr, 4, 1);
   Insert(&arr, 5, 1);
   Insert(&arr, 7, 0);
+  Insert(&arr, 11, 10);
 
   printf("\n----\n");
   Display(arr);
