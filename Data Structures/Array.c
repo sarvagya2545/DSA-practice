@@ -81,7 +81,7 @@ void DeleteAtIndex(struct Array *arr, int index) {
 }
 
 // Find the item and return the index, if not found, return -1;
-int Search(struct Array *arr, int x) {
+int getIndex(struct Array *arr, int x) {
   for(int i = 0; i < arr->length; i++) {
     if((arr->A)[i] == x) {
       return i;
@@ -132,7 +132,7 @@ int main() {
   printf("\n----\n");
   Display(arr);
 
-  printf("\nSearching item %d, it is at index %d", 5, Search(&arr, 5));
+  printf("\nSearching item %d, it is at index %d", 5, getIndex(&arr, 5));
   printf("\nGet item at index %d, it is %d", 3, Get(&arr, 3));
 
   Set(&arr, 10, 2);
