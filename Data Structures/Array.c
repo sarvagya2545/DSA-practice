@@ -1,17 +1,29 @@
 #include <stdio.h>
+#include <stdlib.h>
 
-struct IntArray
-{
-    int* container;
-    int length;
-    void (*push)(const struct IntArray*);
+struct Array {
+  int *A;
+  int capacity;
+  int length;
 };
 
-void push(struct IntArray a) {
-    int p = a.container;
+void Display(struct Array arr) {
+  for(int i = 0; i < arr.length; i++)
+    printf("%d ", arr.A[i]);
 }
 
 int main() {
-    
-    return 0;
+  struct Array arr;
+  scanf("%d", &arr.capacity);
+
+  arr.A = malloc(arr.capacity * sizeof(int));
+
+  scanf("%d", &arr.length);
+
+  for(int i = 0; i < arr.length; i++)
+    scanf("%d", &arr.A[i]);
+
+  printf("----\n");
+  Display(arr);
+
 }
