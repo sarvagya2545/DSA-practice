@@ -80,8 +80,7 @@ void DeleteAtIndex(struct Array *arr, int index) {
   arr->length--;
 }
 
-// Find the item and return the index, if not found, return -1;
-int getIndex(struct Array *arr, int x) {
+int linearSearch(struct Array *arr, int x) {
   for(int i = 0; i < arr->length; i++) {
     if((arr->A)[i] == x) {
       return i;
@@ -89,6 +88,11 @@ int getIndex(struct Array *arr, int x) {
   }
 
   return -1;
+}
+
+// Find the item and return the index, if not found, return -1;
+int getIndex(struct Array *arr, int x) {
+  return linearSearch(arr, x);
 }
 
 // get the item at the current index
