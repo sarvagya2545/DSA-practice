@@ -90,6 +90,28 @@ int linearSearch(struct Array *arr, int x) {
   return -1;
 }
 
+int binarySearch(struct Array *arr, int x) {
+  int l = 0;
+  int r = arr->length - 1;
+  while(1) {
+    int mid = (l + r) / 2;
+
+    if(l > r) {
+      return -1;
+    }
+    
+    printf("\ndeb => arr[mid] == %d\n", (arr->A)[mid]);
+
+    if(x == (arr->A)[mid]) {
+      return mid;
+    } else if(x > (arr->A)[mid]) {
+      l = mid + 1;
+    } else if(x < (arr->A)[mid]) {
+      r = mid - 1;
+    }
+  }
+}
+
 // Find the item and return the index, if not found, return -1;
 int getIndex(struct Array *arr, int x) {
   return linearSearch(arr, x);
