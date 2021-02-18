@@ -45,6 +45,13 @@ void Append(struct Array *arr, int x) {
   arr -> length = arr -> length + 1;
 }
 
+void bubbleSort(struct Array *arr) {
+  for(int i = 0; i < arr->length; i++)
+    for(int j = i + 1; j < arr->length; j++)
+      if(arr->A[i] > arr->A[j])
+        swap(&(arr->A)[i], &(arr->A)[j]);
+}
+
 // insert the item at the provided index
 void Insert(struct Array *arr, int x, int index) {
 
@@ -197,8 +204,8 @@ int main() {
   printf("\n----\n");
   Display(arr);
 
-  printf("reversing array");
-  reverse(&arr);
+  printf("sorting array");
+  bubbleSort(&arr);
 
   printf("\n----\n");
   Display(arr);
