@@ -65,6 +65,9 @@ void leftRotateBy1(struct Array *arr) {
 
 // left rotate by d elements
 void leftRotate(struct Array *arr, int d) {
+  // to not repeat rotation when d exceeds array length
+  d = d % (arr->length);
+
   while(d--)
     leftRotateBy1(arr);
 }
@@ -81,6 +84,8 @@ void rightRotateBy1(struct Array *arr) {
 
 // rotate array right d times
 void rightRotate(struct Array *arr, int d) {
+  d = d % (arr->length);
+
   while (d--)
     rightRotateBy1(arr);
 }
