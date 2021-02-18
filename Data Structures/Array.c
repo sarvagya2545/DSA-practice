@@ -90,6 +90,7 @@ int linearSearch(struct Array *arr, int x) {
   return -1;
 }
 
+// binary searcj using loops
 int binarySearch(struct Array *arr, int x) {
   int l = 0;
   int r = arr->length - 1;
@@ -100,15 +101,30 @@ int binarySearch(struct Array *arr, int x) {
       return -1;
     }
     
-    printf("\ndeb => arr[mid] == %d\n", (arr->A)[mid]);
+    int midElement = (arr->A)[mid];
 
-    if(x == (arr->A)[mid]) {
+    if(x == midElement) {
       return mid;
-    } else if(x > (arr->A)[mid]) {
+    } else if(x > midElement) {
       l = mid + 1;
-    } else if(x < (arr->A)[mid]) {
+    } else if(x < midElement) {
       r = mid - 1;
     }
+  }
+}
+
+// recursive binary search
+int rBinarySearch(struct Array *arr, int x, int l, int r) {
+  int mid = (l + r) / 2;
+
+  int midElement = (arr->A)[mid];
+
+  if(x == midElement) {
+    return mid;
+  } else if(x > midElement) {
+    return rBinarySearch(arr, x, mid + 1, r);
+  } else {
+    return rBinarySearch(arr, x, l, mid - 1);
   }
 }
 
