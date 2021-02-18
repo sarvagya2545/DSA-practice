@@ -7,6 +7,12 @@ struct Array {
   int length;
 };
 
+void swap(int *a, int *b) {
+  *a = *a + *b;
+  *b = *a - *b;
+  *a = *a - *b;
+}
+
 // double the size of the array, not to be used by user.
 void doubleSize(struct Array *arr) {
   int newSize = arr->capacity * 2;
@@ -133,13 +139,17 @@ int getIndex(struct Array *arr, int x) {
   return linearSearch(arr, x);
 }
 
+// reverse the array
+void reverse(struct Array *arr) {
+
+  int len = arr->length;
+
+  for(int i = 0; i < len/2; i++)
+    swap(&(arr->A)[i], &(arr->A)[len - i - 1]);
+}
+
 // get the item at the current index
 int Get(struct Array *arr, int index) {
-  // if the index >= length - 1, stop executing
-  if(index >= arr->length - 1 || index < 0) {
-    printf("invalid index");
-    return;
-  }
   return (arr->A)[index];
 }
 
@@ -187,4 +197,9 @@ int main() {
   printf("\n----\n");
   Display(arr);
 
+  printf("reversing array");
+  reverse(&arr);
+
+  printf("\n----\n");
+  Display(arr);
 }
