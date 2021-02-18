@@ -180,12 +180,21 @@ int getIndex(struct Array *arr, int x) {
 }
 
 // reverse the array
-void reverse(struct Array *arr) {
+void reverseAll(struct Array *arr) {
 
   int len = arr->length;
 
   for(int i = 0; i < len/2; i++)
     swap(&(arr->A)[i], &(arr->A)[len - i - 1]);
+}
+
+// reverse a part of the array
+void reverse(struct Array *arr, int l, int r) {
+
+  for(int i = l; i < (l+r)/2 ;i++) {
+    printf("\nswapping %d %d\n", i, r - (i - l));
+    swap(&(arr->A)[i], &(arr->A)[r - (i - l)]);
+  }
 }
 
 // get the item at the current index
@@ -237,8 +246,17 @@ int main() {
   printf("\n----\n");
   Display(arr);
 
-  printf("right rotating array");
-  rightRotate(&arr, 2);
+  
+  Append(&arr, 5);
+  Append(&arr, 7);
+  Append(&arr, 8);
+  Append(&arr, 9);
+
+  printf("\n----\n");
+  Display(arr);
+
+  printf("\nreverse a part of the array");
+  reverse(&arr, 4, 7);
 
   printf("\n----\n");
   Display(arr);
