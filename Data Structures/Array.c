@@ -45,11 +45,28 @@ void Append(struct Array *arr, int x) {
   arr -> length = arr -> length + 1;
 }
 
+// the famous bubble sort
 void bubbleSort(struct Array *arr) {
   for(int i = 0; i < arr->length; i++)
     for(int j = i + 1; j < arr->length; j++)
       if(arr->A[i] > arr->A[j])
         swap(&(arr->A)[i], &(arr->A)[j]);
+}
+
+// left rotate array by 1
+void leftRotateBy1(struct Array *arr) {
+  int leftmostElement = arr->A[0];
+
+  for(int i = 0; i < arr->length - 1; i++)
+    arr->A[i] = arr->A[i + 1];
+
+  arr->A[arr->length - 1] = leftmostElement;
+}
+
+// left rotate by d elements
+void leftRotate(struct Array *arr, int d) {
+  while(d--)
+    leftRotateBy1(arr);
 }
 
 // insert the item at the provided index
@@ -204,8 +221,8 @@ int main() {
   printf("\n----\n");
   Display(arr);
 
-  printf("sorting array");
-  bubbleSort(&arr);
+  printf("left rotating array");
+  leftRotate(&arr, 3);
 
   printf("\n----\n");
   Display(arr);
