@@ -135,6 +135,11 @@ int getIndex(struct Array *arr, int x) {
 
 // get the item at the current index
 int Get(struct Array *arr, int index) {
+  // if the index >= length - 1, stop executing
+  if(index >= arr->length - 1 || index < 0) {
+    printf("invalid index");
+    return;
+  }
   return (arr->A)[index];
 }
 
