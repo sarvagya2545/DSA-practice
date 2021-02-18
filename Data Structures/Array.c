@@ -69,6 +69,22 @@ void leftRotate(struct Array *arr, int d) {
     leftRotateBy1(arr);
 }
 
+void rightRotateBy1(struct Array *arr) {
+  int rightMostElement = arr->A[arr->length - 1];
+
+  for(int i = arr->length - 1; i > 0; i--) {
+    arr->A[i] = arr->A[i - 1];
+  }
+
+  arr->A[0] = rightMostElement;
+}
+
+// rotate array right d times
+void rightRotate(struct Array *arr, int d) {
+  while (d--)
+    rightRotateBy1(arr);
+}
+
 // insert the item at the provided index
 void Insert(struct Array *arr, int x, int index) {
 
@@ -221,8 +237,8 @@ int main() {
   printf("\n----\n");
   Display(arr);
 
-  printf("left rotating array");
-  leftRotate(&arr, 3);
+  printf("right rotating array");
+  rightRotate(&arr, 2);
 
   printf("\n----\n");
   Display(arr);
