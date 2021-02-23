@@ -111,6 +111,36 @@ void mergeSort(int arr[], int l, int r) {
     }
 }
 
+int partition(int arr[], int l, int r) {
+
+    int pivot = arr[l];
+    int i = l, j = r;
+
+    while(i < j) {
+        do{
+            i++;
+        } while(arr[i] <= pivot);
+
+        do {
+            j--;
+        } while (arr[j] > pivot);
+        
+        if(i < j) {
+            swap(&arr[i], &arr[j]);
+        }
+    }
+    swap(&arr[l], &arr[j]);
+    return j;
+}
+
+void quickSort(int arr[], int l, int r) {
+    if(l < r) {
+        int j = partition(arr, l, r);
+        quickSort(arr, l, j);
+        quickSort(arr, j+1, r);
+    }
+}
+
 int main() {
 
     int arr[] = { 5,3,4,7,6,8,1,2 };
@@ -119,8 +149,9 @@ int main() {
     // bubbleSort(arr, n);
 
     // insertionSort(arr, n);
-    mergeSort(arr, 0, n - 1);
+    // mergeSort(arr, 0, n - 1);
     
+    quickSort(arr, 0, n);
 
     for(int i = 0; i < n; i++)
         printf("%d ", arr[i]);
