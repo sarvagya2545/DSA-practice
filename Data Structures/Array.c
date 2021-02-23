@@ -202,6 +202,62 @@ void reverse(struct Array *arr, int l, int r) {
   }
 }
 
+void merge(struct Array *arr, int l, int mid, int r) {
+  int lNo = mid - l + 1;
+  int rNo = r - mid;
+
+  int R[rNo];
+  int L[lNo];
+
+  int i, j, k;
+
+  for(i = 0; i < lNo; i++) {
+    L[i] = arr->A[l + i];
+  }
+
+  for(int j = 0; j < rNo; j++) {
+    R[j] = arr->A[mid + 1 + j];
+  }
+
+  i = l;
+  j = 0;
+  k = 0;
+
+  while(j < lNo && k < rNo) {
+    if(L[j] <= R[k]) {
+      arr->A[i] = L[j];
+      j++;
+    } else {
+      arr->A[i] = R[k];
+      k++;
+    }
+    i++;
+  }
+
+  while (j < lNo) {
+    arr->A[i] = L[j];
+    j++;
+    i++;
+  }
+
+  while(k < rNo) {
+    arr->A[i] = R[k];
+    k++;
+    i++;
+  }
+
+}
+
+void mergeSort(struct Array *arr, int l, int r) {
+  if(l < r) {
+    int mid = (l + r)/2;
+
+    mergeSort(arr, l, mid);
+    mergeSort(arr, mid + 1, r);
+    merge(arr, l, mid, r);
+  }
+}
+
 // get the item at the current index
 int Get(struct Array *arr, int index) {
   return (arr->A)[index];
@@ -231,37 +287,21 @@ int main() {
   printf("----\n");
   Display(arr);
 
-  Insert(&arr, 4, 1);
-  Insert(&arr, 5, 1);
-  Insert(&arr, 7, 0);
-
-  printf("\n----\n");
-  Display(arr);
-
-  DeleteAtIndex(&arr, 4);
-
-  printf("\n----\n");
-  Display(arr);
-
-  printf("\nSearching item %d, it is at index %d", 5, getIndex(&arr, 5));
-  printf("\nGet item at index %d, it is %d", 3, Get(&arr, 3));
-
-  Set(&arr, 10, 2);
-
-  printf("\n----\n");
-  Display(arr);
-
-  
   Append(&arr, 5);
   Append(&arr, 7);
   Append(&arr, 8);
   Append(&arr, 9);
+  Append(&arr, 1);
+  Append(&arr, 6);
+  Append(&arr, 3);
+  Append(&arr, 4);
+  Append(&arr, 8);
+  Append(&arr, 2);
 
   printf("\n----\n");
   Display(arr);
 
-  printf("\nreverse a part of the array");
-  reverse(&arr, 4, 7);
+  mergeSort(&arr, 0, arr.length - 1);
 
   printf("\n----\n");
   Display(arr);
