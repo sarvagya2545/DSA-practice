@@ -45,12 +45,28 @@ void Append(struct Array *arr, int x) {
   arr -> length = arr -> length + 1;
 }
 
-// the famous bubble sort
-void bubbleSort(struct Array *arr) {
+// selection sort
+void selectionSort(struct Array *arr) {
   for(int i = 0; i < arr->length; i++)
     for(int j = i + 1; j < arr->length; j++)
       if(arr->A[i] > arr->A[j])
         swap(&(arr->A)[i], &(arr->A)[j]);
+}
+
+void bubbleSort(struct Array *arr) {
+     for(int i = 0; i < arr->length; i++) {
+        int flg = 0;
+
+        for(int j = 0; j < arr->length - 1; j++) {
+            if(arr->A[j] > arr->A[j+1]) {
+                flg = 1;
+                swap(&arr->A[j], &arr->A[j + 1]);
+            }   
+        }
+
+        if(!flg)
+            break;
+    }
 }
 
 // left rotate array by 1
@@ -93,9 +109,7 @@ void rightRotate(struct Array *arr, int d) {
 // insert the item at the provided index
 void Insert(struct Array *arr, int x, int index) {
 
-  if(index > arr->length) {
-    printf("\nERROR: You tried to insert %d at the index %d, which exceeds the current size of array, so insert operation aborted.\n", x ,index);
-
+  if(index > arr->length || index < 0) {
     return;
   }
 
@@ -248,6 +262,7 @@ void merge(struct Array *arr, int l, int mid, int r) {
 
 }
 
+// merge sort
 void mergeSort(struct Array *arr, int l, int r) {
   if(l < r) {
     int mid = (l + r)/2;
@@ -255,6 +270,50 @@ void mergeSort(struct Array *arr, int l, int r) {
     mergeSort(arr, l, mid);
     mergeSort(arr, mid + 1, r);
     merge(arr, l, mid, r);
+  }
+}
+
+// partition for quicksort
+int partition(struct Array *arr, int l, int h) {
+  int pivot = arr->A[l];
+
+  int i = l, j = h;
+
+  printf("\ni at start %d j at start %d\n", i, j);
+  printf("pivot => %d\n", pivot);
+
+  while(i < j) {
+    do {
+      i++;
+    } while(arr->A[i] <= pivot);
+
+    do {
+      j--;
+    } while(arr->A[j] > pivot);
+
+    printf("\ni %d j %d\n", i, j);
+
+    if(i < j) {
+      printf("swapped i & j\n");
+      swap(&(arr->A)[i], &(arr->A)[j]);
+    } 
+  }
+
+  printf("swapped l & j\n");
+  swap(&(arr->A)[l], &(arr->A)[j]);
+
+  return j;
+}
+
+// quick sort
+void quickSort(struct Array *arr, int l, int h) {
+  if(l < h) {
+    int j = partition(arr, l, h);
+    printf("\n");
+    printf("j => %d\t", j);
+    Display(*arr);
+    quickSort(arr, l, j);
+    quickSort(arr, j + 1, h);
   }
 }
 
@@ -301,7 +360,8 @@ int main() {
   printf("\n----\n");
   Display(arr);
 
-  mergeSort(&arr, 0, arr.length - 1);
+  // mergeSort(&arr, 0, arr.length - 1);
+  quickSort(&arr, 0, arr.length);
 
   printf("\n----\n");
   Display(arr);
