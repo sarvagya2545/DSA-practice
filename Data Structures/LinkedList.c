@@ -23,11 +23,6 @@ struct Node *createNode(int data)
     return el;
 }
 
-// struct LinkedList {
-//     struct Node* head;
-//     struct Node* tail;
-// };
-
 struct Node *create(int arr[], int n)
 {
     int i;
